@@ -2,9 +2,6 @@ import sysconfig
 import time
 import subprocess
 
-# переписать для библиотеки pyinotify? 
-# https://sysadmin.pm/pyinotify/
-
 def getTimeDate():
 	return time.strftime("%H:%M:%S %d.%m.%Y", time.localtime())
 
@@ -35,15 +32,11 @@ def getCurrentOS():
 	else:
 		return TYPE_OS[2] # Windows and other
 
-# По умолчанию Arch
 
 CURRENT_OS = getCurrentOS()
 
 # Время обновления проверки в секундах
 TIME_UPDATE = 30
-
-# Отправлять на сервер изменения 1 раз в 5 минут
-# TIME_PUSH = 300
 
 STATUS = "git status"
 ADD = "git add ."
@@ -53,12 +46,6 @@ REMOTE = "git remote show origin"
 FETCH = "git fetch --all"
 RESET = "git reset --hard origin/master"
 
-
-# timeWorkLoop = 120
-
-# _start = round(time.time(), 0)
-# while round(time.time(), 0) < _start + timeWorkLoop:
-while 1:
 	# Проверка на наличие интернета 
 	try:
 		subprocess.check_call(["ping", "-c 1", "www.google.com"])
@@ -76,7 +63,6 @@ while 1:
 
 		# Есть изменения в удалённом репозитории
 		if ("локальная ветка устарела" in output_remote) or ("local out of date" in output_remote):
-			# print("++++++++++++++++++++++++Есть обновления. Получить?")
 			fetch = subprocess.Popen(FETCH,stdout=subprocess.PIPE, shell=True)
 			fetch.wait()
 			reset = subprocess.Popen(RESET,stdout=subprocess.PIPE, shell=True)
@@ -86,7 +72,7 @@ while 1:
 		elif ("уже актуальна" in output_remote) or ("up to date" in output_remote):
 			print("***** NOT NEEDED PULL *****")
 		else:
-			print("1. Текст приёма не распознан! The reception text is not recognized!")
+			print("Текст приёма не распознан! The reception text is not recognized!")
 			print(output_remote)
 	except:
 		print("Неизвестная ошибка. Возможно нет интернета")
