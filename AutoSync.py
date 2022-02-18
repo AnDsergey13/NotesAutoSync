@@ -17,20 +17,27 @@ def Push():
 	push = subprocess.Popen(PUSH, stdout=subprocess.PIPE, shell=True)
 	push.wait()
 
-# Тип ОС
-TYPE_OS = [
-	[0, "Arch"],
-	[1, "Android"],
-	[2, "Windows"]
-]
+def getCurrentOS():
+	"""
+	Automatic detection of the operating system (OS). Required to create a commit
+	Автоматическое определение операционной системы(ОС). Требуется для создания коммита
+	"""
+	TYPE_OS = [
+		[0, "Arch"],
+		[1, "Android"],
+		[2, "Windows"]
+	]
+
+	if sysconfig.get_platform() == "linux-x86_64": 
+		return TYPE_OS[0]
+	elif sysconfig.get_platform() == "linux-aarch64": 
+		return TYPE_OS[1]
+	else:
+		return TYPE_OS[2] # Windows and other
 
 # По умолчанию Arch
-CURRENT_OS = TYPE_OS[0]
 
-if sysconfig.get_platform() == "linux-x86_64": 
-	CURRENT_OS = TYPE_OS[0]
-elif sysconfig.get_platform() == "linux-aarch64": 
-	CURRENT_OS = TYPE_OS[1]
+CURRENT_OS = getCurrentOS()
 
 # Время обновления проверки в секундах
 TIME_UPDATE = 30
