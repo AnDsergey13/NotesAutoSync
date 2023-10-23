@@ -1,0 +1,64 @@
+[Output]
+output-format = colorized
+
+[Main]
+disable =
+    ; https://pylint.pycqa.org/en/latest/faq.html#which-messages-should-i-disable-to-avoid-duplicates-if-i-use-other-popular-linters
+
+    ; Duplicates with flake8:pycodestyle
+    ; bad-indentation,
+    ; bare-except,
+    ; line-too-long,
+    ; missing-final-newline,
+    ; multiple-statements,
+    ; singleton-comparison,
+    ; trailing-whitespace,
+    ; unnecessary-semicolon,
+    ; unneeded-not is not covered by flake8
+    ; unneeded-not,
+    ; wrong-import-position,
+
+    ; Duplicates with flake8:pyflakes
+    ; undefined-variable,
+    ; unused-import,
+    ; unused-variable,
+
+    ; Do not show TODO, FIXME comments
+    fixme,
+
+    ; Docstrings
+    missing-module-docstring,
+    ; missing-class-docstring,
+    missing-function-docstring,
+    empty-docstring,
+
+    ; Long lines
+    line-too-long,
+
+    ; Short names
+    invalid-name,
+
+    ; if, else, return
+    no-else-return,
+    inconsistent-return-statements,
+
+    ; 
+    consider-using-in,
+
+    ; Global variables
+    invalid-name,
+    global-statement,
+
+    ; Exceptions
+    bare-except,
+
+    ; Imports
+    ; import-error,
+
+    ; Using OOP incorrectly
+    ; unused-private-member,
+    ; protected-access,
+
+[Format]
+; Using tabs instead spaces
+indent-string = \t

@@ -1,0 +1,22 @@
+[flake8]
+exclude =
+    .venv/
+
+ignore =
+    ; closing bracket is missing indentation
+    E133,
+    ; line break before binary operator
+    W503,
+
+    ; indentation contains tabs
+    W191,
+
+    ; line too long
+    E501,
+    ; ignore too many blank lines
+    ; E303,
+    ; do not use bare 'except', E722 and B001 are the same
+    E722,
+    B001,
+
+max-line-length = 120
