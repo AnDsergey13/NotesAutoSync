@@ -2,12 +2,14 @@ import sysconfig
 import time
 import subprocess
 
+
 def getTimeDate():
 	"""
 	Gets the current time and date in a convenient format
 	Получает текущее время и дату в удобном формате
 	"""
 	return time.strftime("%H:%M:%S %d.%m.%Y", time.localtime())
+
 
 def CreateCommit():
 	"""
@@ -25,9 +27,11 @@ def CreateCommit():
 	createCommit = subprocess.Popen(nameCommit, stdout=subprocess.PIPE, shell=True)
 	createCommit.wait()
 
+
 def Push():
 	push = subprocess.Popen(PUSH, stdout=subprocess.PIPE, shell=True)
 	push.wait()
+
 
 def getCurrentOS():
 	"""
@@ -40,12 +44,12 @@ def getCurrentOS():
 		[2, "Windows"]
 	]
 
-	if sysconfig.get_platform() == "linux-x86_64": 
+	if sysconfig.get_platform() == "linux-x86_64":
 		return TYPE_OS[0]
-	elif sysconfig.get_platform() == "linux-aarch64": 
+	elif sysconfig.get_platform() == "linux-aarch64":
 		return TYPE_OS[1]
 	else:
-		return TYPE_OS[2] # Windows and other
+		return TYPE_OS[2]  # Windows and other
 
 
 CURRENT_OS = getCurrentOS()
@@ -64,19 +68,19 @@ RESET = "git reset --hard origin/master"
 
 while True:
 	# Checking for internet availability
-	# Проверка на наличие интернета 
+	# Проверка на наличие интернета
 	try:
 		subprocess.check_call(["ping", "-c 1", "www.google.com"])
 		print("***** Internet connect !!! *****")
-	except:
-		print("***** Internet DISconnect !!! *****")
+	except subprocess.CalledProcessError as err:
+		print(f"***** Internet DISconnect !!! *****\n{err}")
 		time.sleep(TIME_UPDATE)
 		continue
 
 	# Checking if there were any changes in the remote repository
 	# Проверяем, были ли какие-то изменения в удалённом репозитории
 	try:
-		remote = subprocess.Popen(REMOTE,stdout=subprocess.PIPE, shell=True)
+		remote = subprocess.Popen(REMOTE, stdout=subprocess.PIPE, shell=True)
 		remote.wait()
 		# We get the answer, and convert it to a string
 		# Получаем ответ, и преобразуем в строку
@@ -85,9 +89,9 @@ while True:
 		# If there are changes in the remote repository, then we do FETCH and RESET. This is necessary in order to avoid errors when merging.
 		# Если есть изменения в удалённом репозитории, то делааем FETCH и RESET. Это необходимо для того, чтобы избежать ошибок при слиянии.
 		if ("локальная ветка устарела" in output_remote) or ("local out of date" in output_remote):
-			fetch = subprocess.Popen(FETCH,stdout=subprocess.PIPE, shell=True)
+			fetch = subprocess.Popen(FETCH, stdout=subprocess.PIPE, shell=True)
 			fetch.wait()
-			reset = subprocess.Popen(RESET,stdout=subprocess.PIPE, shell=True)
+			reset = subprocess.Popen(RESET, stdout=subprocess.PIPE, shell=True)
 			reset.wait()
 			print("***** PULL COMPLITE *****")
 		# If there are no changes in the remote repository, then PULL is not necessary
