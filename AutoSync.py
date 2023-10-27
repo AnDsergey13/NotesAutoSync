@@ -1,6 +1,7 @@
 import sysconfig
 import time
 import subprocess
+import os
 
 
 def getTimeDate():
@@ -65,6 +66,22 @@ PUSH = "git push"
 REMOTE = "git remote show origin"
 FETCH = "git fetch --all"
 RESET = "git reset --hard origin/master"
+
+# Getting the absolute path to the current file
+# Получение абсолютного пути к текущему файлу
+current_file_path = os.path.abspath(__file__)
+
+# Getting the name of the current file
+# Получение имени текущего файла
+file_name = os.path.basename(current_file_path)
+
+# We form a path without the name of the file itself. Analogue output of the pwd command
+# Формируем путь без имени самого файла. Аналог вывода команды pwd
+pwd = current_file_path.replace(f"/{file_name}", "")
+
+# Let's go to the folder. For git to find the repository
+# Переходим в папку. Чтобы git нашёл репозиторий
+os.chdir(pwd)
 
 while True:
 	# Checking for internet availability
