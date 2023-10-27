@@ -17,9 +17,10 @@
 ```bash
     cd NotesAutoSync
 ```
-#### 3. Скопировать python скрипт AutoSync.py, в корень синхронизируемого репозитория
+#### 3. Скопировать AutoSync.py и AutoSync.sh, в корень синхронизируемого репозитория
 ```bash
     cp AutoSync.py /home/USER/Notes/AutoSync.py
+    cp AutoSync.sh /home/USER/Notes/AutoSync.sh
     # Вместо /home/USER/Work/Notes/* ввести свой путь, где находятся заметки
     # где, USER - это имя вашего пользователя
 ```
@@ -43,10 +44,21 @@
     ssh -T git@codeberg.org 
 ```
 
-#### 6. Запуск синхронизации
+#### 6. Обычный запуск
 ```bash
     python AutoSync.py
 ```
+Прервать процесс **Ctrl + C**
+
+#### 7. Запуск в автоматическом режиме
+Добавляете в автозапуск приложений следующую строку
+```bash
+    bash /home/USER/Notes/AutoSync.sh
+    # Вместо /home/USER/Work/Notes/* ввести свой путь, где находятся заметки
+    # где, USER - это имя вашего пользователя
+```
+Всё. При запуске системы, скрипт начнёт работать автоматически.
+
 ---
 ### **Windows** - TODO
 ---
