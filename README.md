@@ -32,7 +32,7 @@
     # Время в секундах
     TIME_UPDATE = 30
 ```
-❗❗❗ Перед тем как запускать python скрипт, нужно настроить [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) без пароля, для синхронизируемого репозитория. Иначе скрипт работать не будет.
+❗❗❗ Перед тем как запускать python скрипт, нужно настроить [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) **без пароля**, для синхронизируемого репозитория. Иначе скрипт работать не будет.
 
 А для тестирование вашего SSH-соединения для Codeberg, вместо 
 ```bash
