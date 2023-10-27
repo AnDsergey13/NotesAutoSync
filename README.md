@@ -1,63 +1,65 @@
 # NotesAutoSync
 
-Скрипт для автоматической синхронизации заметок(информации) в Codeberg(GitHub) репозиторий, с помощью SSH.
+Script for automatic synchronization of notes (information) in the Codeberg (GitHub) repository using SSH.
 
-## Инструкция для запуска
+## Startup instructions
 
 ### **Linux** 
-#### 1. Склонировать репозиторий к себе на устройство
+#### 1. Clone the repository to your device
 ```bash
     git clone https://codeberg.org/femto/NotesAutoSync.git
 ```
-или
+or
 ```bash
     git clone https://github.com/AnDsergey13/NotesAutoSync.git
 ```
-#### 2. Перейти в папку со скриптом
+#### 2. Go to the folder with the script
 ```bash
     cd NotesAutoSync
 ```
-#### 3. Скопировать AutoSync.py и AutoSync.sh, в корень синхронизируемого репозитория
+#### 3. Copy AutoSync.py and AutoSync.sh to the root of the synchronized repository
 ```bash
     cp AutoSync.py /home/USER/Notes/AutoSync.py
     cp AutoSync.sh /home/USER/Notes/AutoSync.sh
-    # Вместо /home/USER/Work/Notes/* ввести свой путь, где находятся заметки
-    # где, USER - это имя вашего пользователя
+    # Instead of /home/USER/Work/Notes/* enter your path where the notes are located
+    # where USER is your username
 ```
-#### 4. Перейти в папку с заметками
+#### 4. Go to notes folder
 ```bash
     cd /home/USER/Notes
 ```
-#### 5. При необходимости, настройте задержку синхронизации заметок в AutoSync.py
+#### 5. If necessary, configure the note synchronization delay in AutoSync.py
 ```python
-    # Время в секундах
+    # Time in seconds
     TIME_UPDATE = 30
 ```
-❗❗❗ Перед тем как запускать python скрипт, нужно настроить [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) **без пароля**, для синхронизируемого репозитория. Иначе скрипт работать не будет.
+❗❗❗ Before you run the python script, you need to configure [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) **no password** for a synchronized repository. Otherwise the script will not work.
 
-А для тестирование вашего SSH-соединения для Codeberg, вместо 
+To test your SSH connection you need to write
 ```bash
+    # for GitHub
     ssh -T git@github.com
 ```
-нужно писать
+or
 ```bash
+    # for Сodeberg
     ssh -T git@codeberg.org 
 ```
 
-#### 6. Обычный запуск
+#### 6. Normal launch
 ```bash
     python AutoSync.py
 ```
-Прервать процесс **Ctrl + C**
+Abort the process **Ctrl + C**
 
-#### 7. Запуск в автоматическом режиме
-Добавляете в автозапуск приложений следующую строку
+#### 7. Start in automatic mode
+Add the following line to application startup
 ```bash
     bash /home/USER/Notes/AutoSync.sh
-    # Вместо /home/USER/Work/Notes/* ввести свой путь, где находятся заметки
-    # где, USER - это имя вашего пользователя
+    # Instead of /home/USER/Work/Notes/* enter your path where the notes are located
+    # where USER is your username
 ```
-Всё. При запуске системы, скрипт начнёт работать автоматически.
+All. When the system starts, the script will start working automatically.
 
 ---
 ### **Windows** - TODO
