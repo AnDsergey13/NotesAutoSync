@@ -25,7 +25,7 @@
 ```
 #### 4. Перейти в папку с заметками
 ```bash
-    cd /home/USER/Notes/AutoSync.py
+    cd /home/USER/Notes
 ```
 #### 5. При необходимости, настройте задержку синхронизации заметок в AutoSync.py
 ```python
